@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mapper.SettingMapper">
+
+	<select id="memberInfo" resultType="MemberVO">
+		select * from member where mid=#{mid}
+	</select>
+
+	<select id="openCrew" resultType="CrewVO">
+		select * from crew where mid=#{mid}
+	</select>
+	
+	<select id="joinCrew" resultType="CrewVO">
+		select distinct(c.cno), c.mid, c.REGION, c.TITLE, c.attend_cnt, c.JOIN_CNT, c.category 
+		 from status s join crew c on s.cno = c.cno 
+		 where s.mid=#{mid}
+	</select>
+	
+	<select id="joinSlist" resultType="JoinSlistVO">
+		select c.CNO, c.TITLE, c.ATTEND_CNT crew_attend_cnt, c.JOIN_CNT, s.SL_NO, s.ATTEND_TITLE, s.ATTEND_REGION, s.ATTEND_DATE, s.ATTEND_CNT slist_attend_cnt, s.s_join_cnt, s.ATTEND_MONEY 
+		 from slist s join crew c on s.CNO = c.CNO
+		 where s.SL_NO in (select sl_no from status where mid = #{mid})
+	</select>
+	
+	<update id="memberUpdate">
+		update member set password=#{password}, gender=#{gender}, birth=#{birth}, address=#{address}, phone=#{phone}, category=#{category} where mid=#{mid}
+	</update>
+	
+	<delete id="memberDelete">
+		delete from member where mid=#{mid}
+	</delete>
+	
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mapper.MyMapper">
+
+	<select id="crew_sel_list" resultType="CrewVO">
+		select c.* from crew c, member m
+		 where c.region=m.ADDRESS
+			and c.category=m.CATEGORY
+			and m.mid=#{mid}
+			and c.cno not in (select distinct(c.cno) from status s join crew c on s.cno = c.cno where s.mid=#{mid})
+		 order by read_cnt desc
+	</select>
+	
+	<select id="attend_crew_list" resultType="CrewVO">
+		select distinct(c.cno), c.mid, c.REGION, c.TITLE, c.content, c.attend_cnt, c.JOIN_CNT, c.writeday, c.read_cnt, c.category 
+		from status s join crew c on s.cno = c.cno where s.mid=#{mid}
+	</select>
+	
+</mapper>

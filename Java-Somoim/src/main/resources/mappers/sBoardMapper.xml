@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.mappers.sBoardMapper">
+
+	<insert id="sboard_create">
+		insert into sBoard(sb_no, cno, mid, sb_title, sb_content, sb_picture) values (seq_sb_no.nextval, #{cno}, #{mid}, #{sb_title}, #{sb_content}, #{sb_picture})
+	</insert>
+	
+	<select id="sboard_list" resultType="sBoardVO">
+		select * from sBoard where cno=#{cno} order by sb_no desc
+	</select>
+	
+	<select id="sboard_detail" resultType="sBoardVO">
+		select * from sBoard where sb_no=#{sb_no} 
+	</select>
+
+	<update id="sboard_update">
+		update sBoard set sb_title=#{sb_title}, sb_content=#{sb_content}, sb_picture=#{sb_picture} where sb_no=#{sb_no}
+	</update>
+	
+	<delete id="sboard_delete">
+		delete from sBoard where sb_no=#{sb_no}	
+	</delete>
+	
+	<select id="sboard_member_name" resultType="String">
+		select m.name from sBoard sb join member m on sb.mid = m.mid where sb_no=#{sb_no}
+	</select>
+	
+	
+</mapper>

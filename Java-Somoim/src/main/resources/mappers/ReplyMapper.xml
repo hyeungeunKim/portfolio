@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.mappers.ReplyMapper">
+
+
+	<insert id="reply_create_sgallery">
+		insert into Reply (re_no, mid, sg_no, re_content) values (seq_re_no.nextval, #{mid}, #{sg_no}, #{re_content})
+	</insert>
+	
+	
+	<insert id="reply_create_sboard">
+		insert into Reply (re_no, mid, sb_no, re_content) values (seq_re_no.nextval, #{mid}, #{sb_no}, #{re_content})
+	</insert>
+		
+	
+	<select id="reply_list_sgallery" resultType="ReplyVO">
+		select * from Reply where sg_no=#{sg_no} order by re_no desc
+	</select>
+	
+	<select id="reply_list_sboard" resultType="ReplyVO">
+		select * from Reply where sb_no=#{sb_no} order by re_no desc
+	</select>
+	
+
+
+	<update id="reply_update">
+		update Reply set re_content=#{re_content} where re_no=#{re_no}
+	</update>
+
+
+	<delete id="reply_delete">
+			delete from Reply where re_no=#{re_no}	
+	</delete>
+	
+</mapper>

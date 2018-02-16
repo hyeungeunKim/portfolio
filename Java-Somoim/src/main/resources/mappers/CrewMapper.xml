@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mapper.CrewMapper">
+
+	<select id="crew_list" resultType="CrewVO">
+		select * from crew 
+		 where cno not in (select distinct(c.cno) from status s join crew c on s.cno = c.cno where s.mid=#{mid}) 
+		 order by read_cnt desc
+	</select>
+	
+	<select id="crew_join_cnt" resultType="Integer">
+		select count(distinct(mid)) from Status where cno=#{cno}
+	</select>
+	
+	<select id="crew_tab_list" resultType="CrewVO">
+		select * from crew where cno = #{cno} 
+	</select>
+	
+	<update id="crew_update_role">
+		update crew set role=#{mid} where cno = #{cno}
+	</update>
+	
+	<update id="crew_delete_role">
+		update crew set role=null where cno = #{cno}
+	</update>
+	
+	<insert id="crew_create">
+		insert into crew
+		(cno, mid, region, title, content, attend_cnt, picture, category)
+		values
+		(seq_cno.nextval,#{mid},#{region},#{title},#{content},#{attend_cnt},#{picture},#{category})
+	</insert>
+	
+	<select id="getCno" resultType="Integer">
+  		select max(cno) from crew
+  	</select>
+  	
+  	<select id="getId" resultType="Integer">
+  		select max(picture) from crew
+  	</select>
+  	
+  	<insert id="join_Crew">
+  		insert into status (sno,cno,sl_no,mid) values(seq_sno.nextval,#{cno},null,#{mid})
+  	</insert>
+  	
+  	<update id="update_join_cnt">
+  		update crew set join_cnt=join_cnt + 1 where cno = #{cno}
+  	</update>
+  	
+  	<update id="update_crew_cnt">
+  		update crew set read_cnt = read_cnt + 1  where cno = #{cno}
+  	</update>
+  	
+  	<update id="crewJoincntSub">
+  		update crew set join_cnt=join_cnt-1 where cno=#{cno}
+  	</update>
+
+  	<update id="slistJoincntSub">
+  		update slist set s_join_cnt=s_join_cnt-1 where sl_no in (select sl_no from status where cno=#{cno} and mid=#{mid})
+  	</update>
+  	
+  	<delete id="deleteStatus">
+  		delete from status where cno=#{cno} and mid=#{mid}
+  	</delete>
+  	
+  	<select id="memberDetail" resultType="MemberVO">
+  		select * from member where mid=#{mid}
+  	</select>
+
+  	<select id="memberCrewList" resultType="CrewVO">
+  		select * from crew where cno in (select distinct(cno) from status where mid=#{mid})
+  	</select>
+  	
+</mapper>

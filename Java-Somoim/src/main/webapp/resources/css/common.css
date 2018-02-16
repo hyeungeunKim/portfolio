@@ -1,0 +1,75 @@
+@CHARSET "UTF-8";
+
+/* 폰트 */
+@font-face{ 
+	font-family:"NotoSans"; 
+	src:url('../fonts/NotoSans-Regular.eot'); 
+	src:url('../fonts/NotoSans-Regular.eot?#iefix') format('embedded-opentype'), 
+	url('../fonts/NotoSans-Regular.ttf') format('truetype');
+}
+
+/* reset */
+body, div, h1, h2, h3, h4, h5, h6, p, address, 
+blockquote, hr, ul, ol, dl, li, dt, dd, table,
+tr, th, td, thead, tbody, tfoot, col, colgroup,
+form, fieldset, input, textarea{
+	margin:0; padding:0; font-family:"NotoSans";
+}
+ul, ol{list-style:none;}
+img{border:0}
+
+
+/* 미디어쿼리 */
+@media screen and (max-width:960px){
+	#common { display:block;}
+	#mobile { display:block;}
+	#web { display:none;}
+}
+
+@media screen and (min-width:960px){
+    #common { display:none !important;}
+    #mobile { display:none;}
+	#web { display:block;}
+}
+
+/* 공통 */
+#header { display:flex; position:fixed; z-index:100; top:0; width:100%; height:auto; background-color:#493334;}
+#header .userCont { display:flex; flex:3; color:#ffffff; padding:15px;}
+#header .userCont>span { display: flex; align-items:center;}
+#header .userCont>span:first-child { flex:2; font-size:22px; align-items: baseline; top:0; line-height:115%}
+#header .userCont>span:last-child { flex:8; padding:0 10px;}
+#header .searchCont { flex:7; background-color:#422b2c; margin:10px; height:35px; line-height:34px; padding:0 10px; color:#ddc5c6; font-size:12px; border-radius: 5px;}
+#header .searchCont span { vertical-align:middle}
+#header2 { display:flex; position:fixed; top:0; width:100%; height:auto; background-color:#493334; z-index:100;}
+#header2 div { display:flex; height:55px;  }
+#header2 .backCont { flex:1; color:#ffffff; font-size:20px; justify-content:center; align-items:center;}
+#header2 .backCont span { top:0;}
+#header2 .titleCont { flex:7; color:#ffffff; justify-content:flex-start; align-items:center;}
+#header2 .snsCont { flex:2; color:#ffffff;}
+#header2 .snsCont span { flex:1; height:55px; text-align:center; line-height:55px; color:#ffffff; font-size:16px; opacity:0.7; top:0;}
+.sub_tab {z-index: 100;}
+#footer { width:100%; height:auto; position:fixed; bottom:0; background-color:#ffffff; border-top:2px solid #dadada; box-sizing:border-box; z-index: 100;}
+#footer .nav { display:flex;}
+#footer .nav li { flex:1; text-align: center; color:#929292;}
+#footer .nav li:hover { color:#493334; }
+#footer .nav li a { padding:0; color:inherit;}
+#footer .btn_list {display: flex; flex-direction: column; height: 65px;}
+#footer .btn_list .btn_ico { display: flex; flex: 1; justify-content: center; align-items: flex-end; font-size:20px;}
+#footer .btn_list .btn_txt { display: flex; flex: 1; justify-content: center; align-items: center; font-size:12px;}
+
+/* 공통버튼 */
+.fixedBtn { display:flex; position: fixed;bottom: 20px;right: 20px;width: 55px;height: 55px;background-color: rgba(246, 96, 96, 0.8);flex-direction: column;border-radius: 28px;color:#ffffff;padding:7px; cursor:pointer; transition: 0.7s ease; }
+.fixedBtn:hover { display:flex; color:#ffffff; text-decoration:none; box-shadow: 2px 2px 11px #333; animation:mm 1s; -webkit-animation:mm 1s;}
+ @keyframes mm {50% {transform:scale(1.2,1.2);}}
+ @-webkit-keyframes mm{50% {-webkit-transform:scale(1.2,1.2);}}
+.fixedBtn>span:first-child { flex:1;display: flex; justify-content: center; align-items: center; font-size:16px;}
+.fixedBtn>span:last-child { flex: 1; display: flex; justify-content: center; align-items: center; font-size:11px;}
+
+
+/* 공통버튼2 */
+.fixedBtn2 { display:flex; position: fixed;bottom: 80px;right: 20px;width: 55px;height: 55px;background-color: rgba(246, 96, 96, 0.8);flex-direction: column;border-radius: 28px;color:#ffffff;padding:7px; cursor:pointer; transition: 0.7s ease; }
+.fixedBtn2:hover { display:flex; color:#ffffff; text-decoration:none; box-shadow: 2px 2px 11px #333; animation:mm 1s; -webkit-animation:mm 1s;}
+ @keyframes mm {50% {transform:scale(1.2,1.2);}}
+ @-webkit-keyframes mm{50% {-webkit-transform:scale(1.2,1.2);}}
+.fixedBtn2>span:first-child { flex:1;display: flex; justify-content: center; align-items: center; font-size:16px;}
+.fixedBtn2>span:last-child { flex:1; display: flex; justify-content: center; align-items: center; font-size:11px;} 

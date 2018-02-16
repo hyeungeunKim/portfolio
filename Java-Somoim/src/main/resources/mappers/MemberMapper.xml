@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mapper.MemberMapper">
+	
+	<!-- 회원가입 -->
+	<insert id="member_join">
+		insert into member
+		(mid, password, name, gender, birth, address, phone, category)
+		values
+		(#{mid},#{password},#{name},#{gender},#{birth},#{address},#{phone},#{category})
+	</insert>
+	
+	<select id="member_login" resultType="MemberVO">
+		select * from member where mid = #{mid} and password = #{password}
+	</select>
+	
+	<select id="member_select" resultType="MemberVO">
+		select * from member where mid = #{mid}
+	</select>
+	
+	<select id="member_tab_list" resultType="MemberVO">
+		select m.mid, m.name, m.POWER from member m join status s on m.mid = s.mid where cno = #{cno} and sl_no is null
+	</select>
+	
+	<select id="visitday_check" resultType="int">
+		select nvl(max(count),0) from visitor where to_char(visit_day, 'yyyymmdd') = #{date}
+	</select>
+	
+	<insert id="insert_visit">
+		insert into visitor (count) values(1)
+	</insert>
+	
+	<update id="update_visit">
+		update visitor set count = count + 1 where to_char(visit_day, 'yyyymmdd') = #{date}
+	</update>
+	
+
+	
+</mapper>
